@@ -2,11 +2,12 @@
 
 pragma solidity ^0.8.10;
 
-import "../interfaces/IInputChainShift.sol";
 import "../openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-contract InputChainShift is IInputChainShift {
+contract InputChainShift {
 	IERC721 public nft;
+
+	event InputShift(address indexed owner, uint256 indexed count, uint256[] tokenIds);
 
 	mapping(address => uint256) public shiftCount;
 	mapping(address => mapping(uint256 => uint256[])) public shiftTokenList;
