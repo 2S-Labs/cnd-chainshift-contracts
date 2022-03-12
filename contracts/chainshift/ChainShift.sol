@@ -20,6 +20,11 @@ contract ChainShift {
 		_;
 	}
 
+	modifier onlyStore() {
+		require(msg.sender == storeAddress);
+		_;
+	}
+
 	constructor(address ca, address addr) {
 		devAddress = msg.sender;
 		setNftCA(ca);
@@ -35,7 +40,7 @@ contract ChainShift {
 		emit InputShift(msg.sender, to, count, tokenIds);
 	}
 
-	function output(address to, uint256[] memory tokenIds) public onlyDev {
+	function output(address to, uint256[] memory tokenIds) public onlyStore {
 		for (uint256 i = 0; i < tokenIds.length; i++) {
 			nft.transferFrom(storeAddress, to, tokenIds[i]);
 		}
